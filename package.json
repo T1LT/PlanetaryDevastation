@@ -1,7 +1,7 @@
 {
   "name": "planetarydevastation",
   "version": "1.0.0",
-  "description": "You start off as a tiny black hole in Outer Space. The goal is to get bigger and bigger by consuming planetary objects such as asteroids and other planets. You cannot consume objects that have more mass than you do. The momentum and gravity aspects are also taken into consideration when animating the absorption process. At a certain point of time, the entire Solar System spawns in. The goal is to get big enough to consume the Sun. All the planetary bodies follow gravitational laws and orbits.",
+  "description": "Agar.io but with planetary bodies!",
   "main": "index.js",
   "browserslist": [
     "defaults"
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/T1LT/PlanetaryDevastation.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nishant Racherla",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/T1LT/PlanetaryDevastation/issues"
