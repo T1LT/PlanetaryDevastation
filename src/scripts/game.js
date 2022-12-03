@@ -1,10 +1,11 @@
 import Asteroid from "./asteroid";
+import BlackHole from "./blackhole";
 
 export default class Game {
   constructor(canvas) {
     this.DIM_X = canvas.width;
     this.DIM_Y = canvas.height;
-    this.NUM_OBJECTS = 100;
+    this.NUM_OBJECTS = 20;
     this.objects = [];
     this.addObjects();
   }
@@ -17,6 +18,11 @@ export default class Game {
       });
       this.objects.push(asteroid);
     }
+    const blackhole = new BlackHole({
+      pos: [this.DIM_X / 2, this.DIM_Y / 2],
+      game: this,
+    });
+    this.objects.push(blackhole);
   }
 
   randomPosition() {
@@ -32,8 +38,10 @@ export default class Game {
 
   moveObjects() {
     this.objects.forEach((object) => {
-      object.move();
-      object.pos = this.wrap(object.pos);
+      if (!(object instanceof BlackHole)) {
+        object.move();
+        object.pos = this.wrap(object.pos);
+      }
     });
   }
 
@@ -57,9 +65,11 @@ export default class Game {
     this.moveObjects();
   }
 
-  start(ctx) {
+  start(ctx, mousePos) {
+    const blackhole = this.objects[this.objects.length - 1]
     setInterval(() => {
       this.step();
+      blackhole.update(mousePos);
       this.draw(ctx);
     }, 20);
   }

@@ -5,7 +5,7 @@ export default class Asteroid extends MovingObject {
   constructor(options) {
     super({
       pos: options.pos,
-      vel: Utils.randomVec(0.5),
+      vel: Utils.randomVec(0.1),
       radius: 20,
       game: options.game,
     });

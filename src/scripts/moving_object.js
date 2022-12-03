@@ -1,3 +1,5 @@
+import Asteroid from "./asteroid";
+
 const Utils = require("./utils");
 export default class MovingObject {
   constructor(options) {
@@ -8,7 +10,8 @@ export default class MovingObject {
   }
 
   draw(ctx) {
-    ctx.fillStyle = "white";
+    if (this instanceof Asteroid) ctx.fillStyle = "white";
+    else ctx.fillStyle = "red"
     ctx.beginPath();
     ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI);
     ctx.fill();
