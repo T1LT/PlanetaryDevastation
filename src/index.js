@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d");
 
 // mouse movement listener
 const mousePos = [];
-canvas.addEventListener("mousemove", event => {
+canvas.addEventListener("mousemove", (event) => {
   event.preventDefault();
   event.stopPropagation();
   mousePos[0] = event.clientX;

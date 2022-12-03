@@ -17,7 +17,9 @@ export default class BlackHole extends MovingObject {
   }
 
   update(mousePos) {
-    let vel = mousePos;
+    let vel = [];
+    vel[0] = mousePos[0];
+    vel[1] = mousePos[1];
     if (mousePos[0] !== this.pos[0] && mousePos[1] !== this.pos[1]) {
       vel[0] -= this.pos[0];
       vel[1] -= this.pos[1];
@@ -26,8 +28,6 @@ export default class BlackHole extends MovingObject {
         this.pos[0] += vel[0];
         this.pos[1] += vel[1];
       }
-    } else {
-      vel = [0, 0];
     }
   }
 }
