@@ -5,7 +5,7 @@ export default class Game {
   constructor(canvas) {
     this.DIM_X = canvas.width;
     this.DIM_Y = canvas.height;
-    this.NUM_OBJECTS = 20;
+    this.NUM_OBJECTS = 200;
     this.objects = [];
     this.addObjects();
   }
@@ -49,7 +49,12 @@ export default class Game {
     for (let i = 1; i < this.objects.length; i++) {
       for (let j = 0; j < i; j++) {
         if (this.objects[i].isCollidedWith(this.objects[j])) {
-          this.objects[i].collideWith(this.objects[j]);
+          if (this.objects[i].radius >= this.objects[j].radius) {
+            this.objects[i].collideWith(this.objects[j]);
+          } else {
+            this.objects[j].collideWith(this.objects[i]);
+            // END THE GAME HERE
+          }
           break;
         }
       }
@@ -66,12 +71,11 @@ export default class Game {
   }
 
   start(ctx, mousePos) {
-    const blackhole = this.objects[this.objects.length - 1]
-    setInterval(() => {
-      this.step();
-      blackhole.update(mousePos);
-      this.draw(ctx);
-    }, 20);
+    const blackhole = this.objects[this.objects.length - 1];
+    this.step();
+    blackhole.update(mousePos);
+    this.draw(ctx);
+    requestAnimationFrame(this.start.bind(this, ctx, mousePos))
   }
 
   wrap(pos) {
