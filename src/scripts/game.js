@@ -8,6 +8,7 @@ export default class Game {
     this.NUM_OBJECTS = 200;
     this.objects = [];
     this.addObjects();
+    this.running = true;
   }
 
   addObjects() {
@@ -31,6 +32,8 @@ export default class Game {
 
   draw(ctx) {
     ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+    // const blackhole = this.objects[this.objects.length - 1];
+    // ctx.scale(20 / blackhole.radius, 20 / blackhole.radius);
     this.objects.forEach((object) => {
       object.draw(ctx);
     });
@@ -52,8 +55,10 @@ export default class Game {
           if (this.objects[i].radius >= this.objects[j].radius) {
             this.objects[i].collideWith(this.objects[j]);
           } else {
+            if (this.objects[i] instanceof BlackHole) {
+              this.running = false;
+            }
             this.objects[j].collideWith(this.objects[i]);
-            // END THE GAME HERE
           }
           break;
         }
@@ -73,9 +78,17 @@ export default class Game {
   start(ctx, mousePos) {
     const blackhole = this.objects[this.objects.length - 1];
     this.step();
-    blackhole.update(mousePos);
+    if (blackhole instanceof BlackHole) {
+      blackhole.update(mousePos);
+    }
     this.draw(ctx);
-    requestAnimationFrame(this.start.bind(this, ctx, mousePos))
+    if (this.running) {
+      requestAnimationFrame(this.start.bind(this, ctx, mousePos));
+    } else {
+      ctx.font = "48px sans-serif";
+      ctx.fillStyle = "#FF0000";
+      ctx.fillText("GAME OVER", this.DIM_X / 2 - 150, this.DIM_Y / 2);
+    }
   }
 
   wrap(pos) {
