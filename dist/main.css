@@ -16,6 +16,24 @@ canvas {
   height: 100vh;
   background-color: black;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "andale mono", monospace;
+}
+
+.footer {
+  font-family: "andale mono", monospace;
+}
+.footer a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
 }

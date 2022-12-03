@@ -13,6 +13,35 @@ canvas {
     height: 100vh;
     background-color: black;
     flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: "andale mono", monospace;
+    // h1, h4 {
+    //     text-shadow:
+    //         0 0 4px #fff,
+    //         0 0 11px #fff,
+    //         0 0 19px #fff,
+    //         0 0 40px #f09,
+    //         0 0 80px #f09,
+    //         0 0 90px #f09,
+    //         0 0 100px #f09,
+    //         0 0 150px #f09;
+    // }
+}
+
+.footer {
+    font-family: "andale mono", monospace;
+    a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+    }
 }

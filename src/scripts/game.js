@@ -36,9 +36,6 @@ export default class Game {
     ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
     // const blackhole = this.objects[this.objects.length - 1];
     // ctx.scale(20 / blackhole.radius, 20 / blackhole.radius);
-    ctx.font = "48px sans-serif";
-    ctx.fillStyle = "white";
-    ctx.fillText("Planetary Devastation", this.DIM_X / 2 - 200, 50);
     this.objects.forEach((object) => {
       object.draw(ctx);
     });
@@ -73,13 +70,13 @@ export default class Game {
 
   remove(obj) {
     this.objects.splice(this.objects.indexOf(obj), 1);
-    if (this.objects.length < 10) {
+    if (this.objects.length < 5) {
       let x = 3;
       const blackhole = this.objects[this.objects.length - 1];
       while (x--) {
         const asteroid = new Asteroid({
           pos: this.randomPosition(),
-          radius: Math.floor(Math.random() * (blackhole.radius - 15)),
+          radius: Math.floor(Math.random() * (30 - 15) + 15),
           game: this,
         });
         if (!asteroid.isCollidedWith(blackhole)) {
@@ -104,9 +101,9 @@ export default class Game {
     if (this.running) {
       requestAnimationFrame(this.start.bind(this, ctx, mousePos));
     } else {
-      ctx.font = "48px sans-serif";
+      ctx.font = "48px andale mono";
       ctx.fillStyle = "#FF0000";
-      ctx.fillText("GAME OVER", this.DIM_X / 2 - 150, this.DIM_Y / 2);
+      ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
     }
   }
 
