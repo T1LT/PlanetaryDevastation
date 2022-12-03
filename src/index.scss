@@ -5,4 +5,14 @@
 
 canvas {
     background-color: black;
+    border: 3px solid white;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,8 +1,8 @@
 import Game from "./scripts/game";
 // canvas
 const canvas = document.getElementById("game-canvas");
-canvas.setAttribute("width", window.innerWidth);
-canvas.setAttribute("height", window.innerHeight);
+canvas.setAttribute("width", window.innerWidth - 50);
+canvas.setAttribute("height", window.innerHeight - 50);
 const ctx = canvas.getContext("2d");
 
 // mouse movement listener
