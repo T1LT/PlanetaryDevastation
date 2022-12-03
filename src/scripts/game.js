@@ -1,5 +1,7 @@
 import Asteroid from "./asteroid";
 import BlackHole from "./blackhole";
+const background = new Image();
+background.src = "./assets/background.png";
 
 export default class Game {
   constructor(canvas) {
@@ -34,6 +36,7 @@ export default class Game {
 
   draw(ctx) {
     ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+    ctx.drawImage(background, 0, 0, this.DIM_X, this.DIM_Y);
     // const blackhole = this.objects[this.objects.length - 1];
     // ctx.scale(20 / blackhole.radius, 20 / blackhole.radius);
     this.objects.forEach((object) => {

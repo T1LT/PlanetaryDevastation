@@ -14,6 +14,11 @@ canvas.addEventListener("mousemove", (event) => {
   mousePos[1] = event.clientY;
 });
 
+// use a state variable
+// add click event listener to window
+// reassign state variable inside the listener
+// use the state variable to call game.start
+
 // running the game
 const game = new Game(canvas);
 game.start(ctx, mousePos);
