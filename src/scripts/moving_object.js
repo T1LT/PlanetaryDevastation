@@ -14,20 +14,25 @@ export default class MovingObject {
     this.vel = options.vel;
     this.radius = options.radius;
     this.game = options.game;
+    this.image = this.getImage();
   }
 
   draw(ctx) {
+    let posX = this.pos[0] - this.image.width / 2;
+    let posY = this.pos[1] - this.image.height / 2;
+    ctx.drawImage(this.image, posX, posY, this.radius * 2, this.radius * 2);
+    // ctx.beginPath();
+    // ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI);
+    // ctx.fill();
+  }
+
+  getImage() {
     if (this instanceof Asteroid) {
-      // let idx = Math.floor(Math.random() * 8);
-      // ctx.drawImage(planets[idx], this.pos[0], this.pos[1]);
-      ctx.fillStyle = "white";
+      let idx = Math.floor(Math.random() * 8);
+      return planets[idx];
     } else {
-      // ctx.drawImage(blackholeImg, this.pos[0], this.pos[1]);
-      ctx.fillStyle = "red";
+      return blackholeImg;
     }
-    ctx.beginPath();
-    ctx.arc(this.pos[0], this.pos[1], this.radius, 0, 2 * Math.PI);
-    ctx.fill();
   }
 
   move() {
