@@ -109,12 +109,16 @@ export default class Game {
       requestAnimationFrame(this.start.bind(this));
     } else if (!this.running) {
       this.ctx.font = "48px andale mono";
-      this.ctx.fillStyle = "#FF0000";
+      this.ctx.fillStyle = "orange";
+      this.ctx.strokeStyle = "red";
       this.ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
+      this.ctx.strokeText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
     } else if (this.paused) {
       this.ctx.font = "48px andale mono";
-      this.ctx.fillStyle = "#FF0000";
+      this.ctx.fillStyle = "orange";
+      this.ctx.strokeStyle = "red";
       this.ctx.fillText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
+      this.ctx.strokeText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
     }
   }
 
