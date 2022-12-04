@@ -4,13 +4,17 @@ const background = new Image();
 background.src = "./assets/background.png";
 
 export default class Game {
-  constructor(canvas) {
+  constructor(canvas, mousePos) {
     this.DIM_X = canvas.width;
     this.DIM_Y = canvas.height;
-    this.NUM_OBJECTS = 20;
+    this.ctx = canvas.getContext("2d");
+    this.mousePos = mousePos;
+    this.NUM_OBJECTS = 15;
     this.objects = [];
     this.addObjects();
     this.running = true;
+    this.paused = false;
+    this.registerPause();
   }
 
   addObjects() {
@@ -73,7 +77,7 @@ export default class Game {
 
   remove(obj) {
     this.objects.splice(this.objects.indexOf(obj), 1);
-    if (this.objects.length < 5) {
+    if (this.objects.length <= 5) {
       let x = 3;
       const blackhole = this.objects[this.objects.length - 1];
       while (x--) {
@@ -94,20 +98,35 @@ export default class Game {
     this.moveObjects();
   }
 
-  start(ctx, mousePos) {
+  start() {
     const blackhole = this.objects[this.objects.length - 1];
     this.step();
     if (blackhole instanceof BlackHole) {
-      blackhole.update(mousePos);
+      blackhole.update(this.mousePos);
     }
-    this.draw(ctx);
-    if (this.running) {
-      requestAnimationFrame(this.start.bind(this, ctx, mousePos));
-    } else {
-      ctx.font = "48px andale mono";
-      ctx.fillStyle = "#FF0000";
-      ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
+    this.draw(this.ctx);
+    if (this.running && !this.paused) {
+      requestAnimationFrame(this.start.bind(this));
+    } else if (!this.running) {
+      this.ctx.font = "48px andale mono";
+      this.ctx.fillStyle = "#FF0000";
+      this.ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
+    } else if (this.paused) {
+      this.ctx.font = "48px andale mono";
+      this.ctx.fillStyle = "#FF0000";
+      this.ctx.fillText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
     }
+  }
+
+  click(e) {
+    this.paused = !this.paused;
+    if (!this.paused) {
+      this.start();
+    }
+  }
+
+  registerPause() {
+    window.addEventListener("mousedown", this.click.bind(this));
   }
 
   wrap(pos) {

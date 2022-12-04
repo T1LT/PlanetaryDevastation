@@ -20,5 +20,5 @@ canvas.addEventListener("mousemove", (event) => {
 // use the state variable to call game.start
 
 // running the game
-const game = new Game(canvas);
-game.start(ctx, mousePos);
+const game = new Game(canvas, mousePos);
+game.start();
