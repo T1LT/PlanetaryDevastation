@@ -14,6 +14,7 @@ canvas.addEventListener("mousemove", (event) => {
   mousePos[1] = event.clientY;
 });
 
+
 // running the game
 const game = new Game(canvas, mousePos);
 game.start();

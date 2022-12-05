@@ -19,18 +19,18 @@ export default class MovingObject {
 
   draw(ctx, scale) {
     if (this instanceof Planet) {
-      // let posX = this.pos[0] - this.radius * scale;
-      let posX = this.pos[0] - this.radius;
-      // let posY = this.pos[1] - this.radius * scale;
-      let posY = this.pos[1] - this.radius;
+      let posX = this.pos[0] - this.radius * scale;
+      // let posX = this.pos[0] - this.radius;
+      let posY = this.pos[1] - this.radius * scale;
+      // let posY = this.pos[1] - this.radius;
       ctx.drawImage(
         this.image,
         posX,
         posY,
-        // this.radius * 2 * scale,
-        this.radius * 2,
-        // this.radius * 2 * scale
-        this.radius * 2
+        this.radius * 2 * scale,
+        // this.radius * 2,
+        this.radius * 2 * scale
+        // this.radius * 2
       );
     } else {
       let posX = this.pos[0] - this.radius * 2;
@@ -72,8 +72,12 @@ export default class MovingObject {
   consumes(otherObj) {
     const sumOfAreas =
       Math.PI * this.radius ** 2 + Math.PI * otherObj.radius ** 2;
-    // if (this instanceof Planet) {
-    this.radius = Math.sqrt(sumOfAreas / Math.PI);
-    // }
+    if (this instanceof Planet) {
+      this.radius = Math.sqrt(sumOfAreas / Math.PI);
+    } else if (!(this instanceof Planet) && this.radius > 80) {
+      this.radius = 0.8 * Math.sqrt(sumOfAreas / Math.PI);
+    } else if (!(this instanceof Planet)) {
+      this.radius = Math.sqrt(sumOfAreas / Math.PI);
+    }
   }
 }

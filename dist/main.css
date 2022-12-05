@@ -33,6 +33,11 @@ h1 {
   color: yellow;
 }
 
+#timer {
+  display: none;
+  color: white;
+}
+
 .footer {
   font-family: "andale mono", monospace;
 }

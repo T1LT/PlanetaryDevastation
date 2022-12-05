@@ -1,10 +1,12 @@
 import Planet from "./planet";
 import BlackHole from "./blackhole";
+import Timer from "./timer";
 const background = new Image();
 background.src = "./assets/background.png";
 
 export default class Game {
   constructor(canvas, mousePos) {
+    this.canvas = canvas;
     this.DIM_X = canvas.width;
     this.DIM_Y = canvas.height;
     this.ctx = canvas.getContext("2d");
@@ -17,6 +19,8 @@ export default class Game {
     this.running = true;
     this.paused = true;
     this.registerPause();
+    this.timer = new Timer();
+    this.score = 0;
   }
 
   addObjects() {
@@ -64,13 +68,17 @@ export default class Game {
         if (this.objects[i].isCollidedWith(this.objects[j])) {
           if (this.objects[i].radius >= this.objects[j].radius) {
             // if the blackhole eats a planet, reduce the scale
-            // if (this.objects[i] instanceof BlackHole) {
-            //   this.scale -= this.scale / (4 * this.objects[i].radius);
-            //   this.scaleHitboxes();
-            // }
+            if (
+              this.objects[i] instanceof BlackHole &&
+              this.objects[i].radius > 80
+            ) {
+              this.scale -= this.scale / (4 * this.objects[i].radius);
+              this.scaleHitboxes();
+            }
             this.objects[i].collideWith(this.objects[j], this.scale);
           } else {
             if (this.objects[i] instanceof BlackHole) {
+              this.score = this.objects[i].score;
               this.running = false;
             }
             this.objects[j].collideWith(this.objects[i]);
@@ -83,9 +91,7 @@ export default class Game {
 
   scaleHitboxes() {
     for (let i = 0; i < this.objects.length; i++) {
-      if (this.objects[i] instanceof Planet) {
-        this.objects[i].scaleRadius(this.scale);
-      }
+      this.objects[i].scaleRadius(this.scale);
     }
   }
 
@@ -97,7 +103,9 @@ export default class Game {
       while (x--) {
         const planet = new Planet({
           pos: this.randomPosition(),
-          radius: Math.floor(Math.random() * (30 - 15) + 15) * this.scale,
+          radius:
+            Math.floor(Math.random() * (blackhole.radius - 30) + 15) *
+            this.scale,
           game: this,
         });
         if (!planet.isCollidedWith(blackhole)) {
@@ -119,15 +127,33 @@ export default class Game {
       blackhole.update(this.mousePos);
     }
     this.draw(this.ctx);
+    this.addGameDetails();
     if (this.running && !this.paused && this.started) {
+      this.timer.startTimer();
       requestAnimationFrame(this.start.bind(this));
     } else if (!this.running) {
       this.addGameOverText();
+      this.timer.endTimer();
     } else if (this.paused && this.started) {
       this.addPausedText();
     } else if (!this.started) {
       this.addLandingText();
     }
+  }
+
+  addGameDetails() {
+    this.ctx.font = "18px andale mono";
+    this.ctx.fillStyle = "yellow";
+    this.ctx.fillText(
+      this.timer.time,
+      this.DIM_X / 2 - 80,
+      this.DIM_Y / 2 - 320
+    );
+    this.ctx.fillText(
+      `SCORE: ${this.objects[this.objects.length - 1].score || this.score}`,
+      this.DIM_X / 2,
+      this.DIM_Y / 2 - 320
+    );
   }
 
   addGameOverText() {
@@ -137,9 +163,14 @@ export default class Game {
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "white";
     this.ctx.fillText(
+      `SCORE: ${this.objects[this.objects.length - 1].score || this.score}`,
+      this.DIM_X - 980,
+      this.DIM_Y / 2 + 40
+    );
+    this.ctx.fillText(
       "Click to Restart",
       this.DIM_X - 1020,
-      this.DIM_Y / 2 + 50
+      this.DIM_Y / 2 + 70
     );
   }
 

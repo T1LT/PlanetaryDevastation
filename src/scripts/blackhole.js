@@ -9,9 +9,11 @@ export default class BlackHole extends MovingObject {
       radius: 20,
       game: options.game,
     });
+    this.score = 0;
   }
 
-  collideWith(otherObj, scale) {
+  collideWith(otherObj) {
+    this.score += 1;
     this.consumes(otherObj);
     this.game.remove(otherObj);
   }

@@ -11,9 +11,8 @@ export default class Planet extends MovingObject {
     });
   }
 
-  collideWith(otherObj, scale) {
+  collideWith(otherObj) {
     this.consumes(otherObj);
-    // this.radius *= scale;
     this.game.remove(otherObj);
   }
 }
