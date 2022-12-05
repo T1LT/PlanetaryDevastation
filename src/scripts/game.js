@@ -12,8 +12,10 @@ export default class Game {
     this.NUM_OBJECTS = 15;
     this.objects = [];
     this.addObjects();
+    this.scale = 1;
+    this.started = false;
     this.running = true;
-    this.paused = false;
+    this.paused = true;
     this.registerPause();
   }
 
@@ -41,10 +43,8 @@ export default class Game {
   draw(ctx) {
     ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
     ctx.drawImage(background, 0, 0, this.DIM_X, this.DIM_Y);
-    // const blackhole = this.objects[this.objects.length - 1];
-    // ctx.scale(20 / blackhole.radius, 20 / blackhole.radius);
     this.objects.forEach((object) => {
-      object.draw(ctx);
+      object.draw(ctx, this.scale);
     });
   }
 
@@ -58,11 +58,17 @@ export default class Game {
   }
 
   checkCollisions() {
+    // use min heap / distance matrix for optimizing this
     for (let i = 1; i < this.objects.length; i++) {
       for (let j = 0; j < i; j++) {
         if (this.objects[i].isCollidedWith(this.objects[j])) {
           if (this.objects[i].radius >= this.objects[j].radius) {
-            this.objects[i].collideWith(this.objects[j]);
+            // if the blackhole eats a planet, reduce the scale
+            // if (this.objects[i] instanceof BlackHole) {
+            //   this.scale -= this.scale / (4 * this.objects[i].radius);
+            //   this.scaleHitboxes();
+            // }
+            this.objects[i].collideWith(this.objects[j], this.scale);
           } else {
             if (this.objects[i] instanceof BlackHole) {
               this.running = false;
@@ -75,6 +81,14 @@ export default class Game {
     }
   }
 
+  scaleHitboxes() {
+    for (let i = 0; i < this.objects.length; i++) {
+      if (this.objects[i] instanceof Asteroid) {
+        this.objects[i].scaleRadius(this.scale);
+      }
+    }
+  }
+
   remove(obj) {
     this.objects.splice(this.objects.indexOf(obj), 1);
     if (this.objects.length <= 5) {
@@ -83,7 +97,7 @@ export default class Game {
       while (x--) {
         const asteroid = new Asteroid({
           pos: this.randomPosition(),
-          radius: Math.floor(Math.random() * (30 - 15) + 15),
+          radius: Math.floor(Math.random() * (30 - 15) + 15) * this.scale,
           game: this,
         });
         if (!asteroid.isCollidedWith(blackhole)) {
@@ -105,26 +119,70 @@ export default class Game {
       blackhole.update(this.mousePos);
     }
     this.draw(this.ctx);
-    if (this.running && !this.paused) {
+    if (this.running && !this.paused && this.started) {
       requestAnimationFrame(this.start.bind(this));
     } else if (!this.running) {
-      this.ctx.font = "48px andale mono";
-      this.ctx.fillStyle = "orange";
-      this.ctx.strokeStyle = "red";
-      this.ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
-      this.ctx.strokeText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
-    } else if (this.paused) {
-      this.ctx.font = "48px andale mono";
-      this.ctx.fillStyle = "orange";
-      this.ctx.strokeStyle = "red";
-      this.ctx.fillText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
-      this.ctx.strokeText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
+      this.addGameOverText();
+    } else if (this.paused && this.started) {
+      this.addPausedText();
+    } else if (!this.started) {
+      this.addLandingText();
     }
   }
 
+  addGameOverText() {
+    this.ctx.font = "48px andale mono";
+    this.ctx.fillStyle = "yellow";
+    this.ctx.fillText("GAME OVER", this.DIM_X / 2 - 130, this.DIM_Y / 2);
+    this.ctx.font = "18px andale mono";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(
+      "Click to Restart",
+      this.DIM_X - 1020,
+      this.DIM_Y / 2 + 50
+    );
+  }
+
+  addPausedText() {
+    this.ctx.font = "48px andale mono";
+    this.ctx.fillStyle = "yellow";
+    this.ctx.fillText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
+  }
+
+  addLandingText() {
+    this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
+    this.ctx.font = "48px andale mono";
+    this.ctx.fillStyle = "yellow";
+    this.ctx.fillText("CLICK TO START", this.DIM_X / 2 - 200, this.DIM_Y / 2);
+    this.ctx.font = "18px andale mono";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(
+      "Move your mouse around to eat planets",
+      this.DIM_X - 1130,
+      this.DIM_Y / 2 + 100
+    );
+    this.ctx.fillText(
+      "Click anywhere to pause",
+      this.DIM_X - 1055,
+      this.DIM_Y / 2 + 150
+    );
+  }
+
   click(e) {
-    this.paused = !this.paused;
+    if (!this.started) {
+      this.started = true;
+      this.start();
+    }
+    if (this.running) {
+      this.paused = !this.paused;
+    }
     if (!this.paused) {
+      this.start();
+    }
+    if (!this.running && !this.paused && this.started) {
+      this.objects = [];
+      this.addObjects();
+      this.running = true;
       this.start();
     }
   }

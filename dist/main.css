@@ -7,7 +7,6 @@
 }
 
 canvas {
-  background-color: black;
   border: 3px solid white;
 }
 
@@ -27,6 +26,11 @@ canvas {
   justify-content: center;
   align-items: center;
   font-family: "andale mono", monospace;
+  user-select: none;
+}
+
+h1 {
+  color: yellow;
 }
 
 .footer {
@@ -36,4 +40,5 @@ canvas {
   margin: 0 10px;
   color: white;
   text-decoration: none;
+  user-select: none;
 }

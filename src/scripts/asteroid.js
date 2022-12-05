@@ -11,8 +11,9 @@ export default class Asteroid extends MovingObject {
     });
   }
 
-  collideWith(otherObj) {
+  collideWith(otherObj, scale) {
     this.consumes(otherObj);
+    // this.radius *= scale;
     this.game.remove(otherObj);
   }
 }

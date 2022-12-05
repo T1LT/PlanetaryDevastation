@@ -11,13 +11,13 @@ export default class BlackHole extends MovingObject {
     });
   }
 
-  collideWith(otherObj) {
+  collideWith(otherObj, scale) {
     this.consumes(otherObj);
     this.game.remove(otherObj);
   }
 
   update(mousePos) {
-    let vel = [...mousePos];
+    let vel = mousePos.slice();
     if (mousePos[0] !== this.pos[0] && mousePos[1] !== this.pos[1]) {
       vel[0] -= this.pos[0] + 25;
       vel[1] -= this.pos[1] + 83;
