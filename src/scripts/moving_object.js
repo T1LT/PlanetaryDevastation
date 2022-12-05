@@ -1,4 +1,4 @@
-import Asteroid from "./asteroid";
+import Planet from "./planet";
 const Utils = require("./utils");
 const blackholeImg = new Image();
 blackholeImg.src = "./assets/blackhole1.png";
@@ -18,7 +18,7 @@ export default class MovingObject {
   }
 
   draw(ctx, scale) {
-    if (this instanceof Asteroid) {
+    if (this instanceof Planet) {
       // let posX = this.pos[0] - this.radius * scale;
       let posX = this.pos[0] - this.radius;
       // let posY = this.pos[1] - this.radius * scale;
@@ -50,7 +50,7 @@ export default class MovingObject {
   }
 
   getImage() {
-    if (this instanceof Asteroid) {
+    if (this instanceof Planet) {
       let idx = Math.floor(Math.random() * 7);
       return planets[idx];
     } else {
@@ -72,7 +72,7 @@ export default class MovingObject {
   consumes(otherObj) {
     const sumOfAreas =
       Math.PI * this.radius ** 2 + Math.PI * otherObj.radius ** 2;
-    // if (this instanceof Asteroid) {
+    // if (this instanceof Planet) {
     this.radius = Math.sqrt(sumOfAreas / Math.PI);
     // }
   }

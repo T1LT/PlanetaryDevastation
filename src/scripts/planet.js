@@ -1,7 +1,7 @@
 import MovingObject from "./moving_object";
 const Utils = require("./utils");
 
-export default class Asteroid extends MovingObject {
+export default class Planet extends MovingObject {
   constructor(options) {
     super({
       pos: options.pos,

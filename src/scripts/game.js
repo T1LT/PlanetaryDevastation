@@ -1,4 +1,4 @@
-import Asteroid from "./asteroid";
+import Planet from "./planet";
 import BlackHole from "./blackhole";
 const background = new Image();
 background.src = "./assets/background.png";
@@ -21,13 +21,13 @@ export default class Game {
 
   addObjects() {
     while (this.objects.length < this.NUM_OBJECTS) {
-      const asteroid = new Asteroid({
+      const planet = new Planet({
         pos: this.randomPosition(),
         // Math.random() * (max - min) + min
         radius: Math.floor(Math.random() * (30 - 15) + 15),
         game: this,
       });
-      this.objects.push(asteroid);
+      this.objects.push(planet);
     }
     const blackhole = new BlackHole({
       pos: [this.DIM_X / 2, this.DIM_Y / 2],
@@ -83,7 +83,7 @@ export default class Game {
 
   scaleHitboxes() {
     for (let i = 0; i < this.objects.length; i++) {
-      if (this.objects[i] instanceof Asteroid) {
+      if (this.objects[i] instanceof Planet) {
         this.objects[i].scaleRadius(this.scale);
       }
     }
@@ -95,13 +95,13 @@ export default class Game {
       let x = 3;
       const blackhole = this.objects[this.objects.length - 1];
       while (x--) {
-        const asteroid = new Asteroid({
+        const planet = new Planet({
           pos: this.randomPosition(),
           radius: Math.floor(Math.random() * (30 - 15) + 15) * this.scale,
           game: this,
         });
-        if (!asteroid.isCollidedWith(blackhole)) {
-          this.objects.unshift(asteroid);
+        if (!planet.isCollidedWith(blackhole)) {
+          this.objects.unshift(planet);
         }
       }
     }
