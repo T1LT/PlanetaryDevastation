@@ -79,6 +79,7 @@ export default class Game {
           } else {
             if (this.objects[i] instanceof BlackHole) {
               this.score = this.objects[i].score;
+              // this.timer.endTimer()
               this.running = false;
             }
             this.objects[j].collideWith(this.objects[i]);
@@ -133,6 +134,9 @@ export default class Game {
       requestAnimationFrame(this.start.bind(this));
     } else if (!this.running) {
       this.addGameOverText();
+      this.timer.started = false;
+      this.timer.time = "00:00";
+      this.timer.startTime = new Date();
       this.timer.endTimer();
     } else if (this.paused && this.started) {
       this.addPausedText();

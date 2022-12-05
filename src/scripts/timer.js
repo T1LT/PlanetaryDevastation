@@ -11,6 +11,7 @@ export default class Timer {
         let currentTime = this.getTime();
         this.time = this.refactorTime(currentTime);
         this.pastTime = this.time;
+        console.log(this.time);
       }, 1000);
     }
     if (!this.started) this.started = true;
