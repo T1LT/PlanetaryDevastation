@@ -30,6 +30,7 @@ export default class Game {
         // Math.random() * (max - min) + min
         radius: Math.floor(Math.random() * (30 - 15) + 15),
         game: this,
+        type: "planet",
       });
       this.objects.push(planet);
     }
@@ -79,7 +80,6 @@ export default class Game {
           } else {
             if (this.objects[i] instanceof BlackHole) {
               this.score = this.objects[i].score;
-              // this.timer.endTimer()
               this.running = false;
             }
             this.objects[j].collideWith(this.objects[i]);
@@ -108,6 +108,7 @@ export default class Game {
             Math.floor(Math.random() * (blackhole.radius - 15) + 15) *
             this.scale,
           game: this,
+          type: "planet",
         });
         if (!planet.isCollidedWith(blackhole)) {
           this.objects.unshift(planet);
@@ -116,9 +117,46 @@ export default class Game {
     }
   }
 
+  addBosses() {
+    const blackhole = this.objects.at(-1);
+    if (this.timer.time === "00:15") {
+      // if the amt of bosses in this.objects < 1
+      if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        this.generateBoss(blackhole, 10);
+      }
+    } else if (this.timer.time === "01:30") {
+      if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        this.generateBoss(blackhole, 20);
+      }
+    } else if (this.timer.time === "02:15") {
+      if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        this.generateBoss(blackhole, 30);
+      }
+    } else if (this.timer.time === "03:00") {
+      if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        this.generateBoss(blackhole, 40);
+      }
+    } else if (this.timer.time === "03:45") {
+      if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        this.generateBoss(blackhole, 50);
+      }
+    }
+  }
+
+  generateBoss(blackhole, offset) {
+    const boss = new Planet({
+      pos: this.randomPosition(),
+      radius: blackhole.radius + offset,
+      game: this,
+      type: "boss",
+    });
+    this.objects.unshift(boss);
+  }
+
   step() {
     this.checkCollisions();
     this.moveObjects();
+    this.addBosses();
   }
 
   start() {
