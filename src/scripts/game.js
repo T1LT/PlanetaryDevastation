@@ -226,6 +226,10 @@ export default class Game {
   addPausedText() {
     this.ctx.font = "48px andale mono";
     this.ctx.fillStyle = "yellow";
+    this.ctx.shadowColor = "white";
+    this.ctx.shadowOffsetX = 0;
+    this.ctx.shadowOffsetY = 0;
+    this.ctx.shadowBlur = 10;
     this.ctx.fillText("PAUSED", this.DIM_X / 2 - 82.5, this.DIM_Y / 2);
   }
 
@@ -233,18 +237,28 @@ export default class Game {
     this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
     this.ctx.font = "48px andale mono";
     this.ctx.fillStyle = "yellow";
+    this.ctx.shadowColor = "yellow";
+    this.ctx.shadowOffsetX = 0;
+    this.ctx.shadowOffsetY = 0;
+    this.ctx.shadowBlur = 10;
     this.ctx.fillText("CLICK TO START", this.DIM_X / 2 - 200, this.DIM_Y / 2);
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "white";
+    this.ctx.shadowColor = "white";
     this.ctx.fillText(
       "Move your mouse around to eat planets",
       this.DIM_X / 2 - 202.5,
       this.DIM_Y / 2 + 100
     );
     this.ctx.fillText(
+      "Watch out for bosses every 45 seconds",
+      this.DIM_X / 2 - 200,
+      this.DIM_Y / 2 + 150
+    );
+    this.ctx.fillText(
       "Click anywhere to pause",
       this.DIM_X / 2 - 125,
-      this.DIM_Y / 2 + 150
+      this.DIM_Y / 2 + 200
     );
   }
 
