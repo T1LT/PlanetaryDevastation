@@ -37,7 +37,7 @@ export default class MovingObject {
       let posY = this.pos[1] - this.radius * 2;
       ctx.drawImage(this.image, posX, posY, this.radius * 4, this.radius * 4);
     }
-    // see hitboxes - debug mode
+    // DEBUG MODE - SEE HITBOXES
     // ctx.fillStyle = "white";
     // ctx.globalAlpha = 0.5;
     // ctx.beginPath();
@@ -75,7 +75,7 @@ export default class MovingObject {
     if (this instanceof Planet) {
       this.radius = Math.sqrt(sumOfAreas / Math.PI);
     } else if (!(this instanceof Planet) && this.radius > 80) {
-      this.radius = 0.8 * Math.sqrt(sumOfAreas / Math.PI);
+      this.radius = 0.9 * Math.sqrt(sumOfAreas / Math.PI);
     } else if (!(this instanceof Planet)) {
       this.radius = Math.sqrt(sumOfAreas / Math.PI);
     }

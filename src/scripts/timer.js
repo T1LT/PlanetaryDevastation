@@ -1,17 +1,16 @@
 export default class Timer {
   constructor() {
-    this.startTime = new Date();
     this.time = "00:00";
     this.started = false;
   }
 
   startTimer() {
     if (!this.started) {
+      this.startTime = new Date();
       this.timerInterval = setInterval(() => {
         let currentTime = this.getTime();
         this.time = this.refactorTime(currentTime);
         this.pastTime = this.time;
-        console.log(this.time);
       }, 1000);
     }
     if (!this.started) this.started = true;

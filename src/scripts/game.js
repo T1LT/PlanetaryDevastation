@@ -105,7 +105,7 @@ export default class Game {
         const planet = new Planet({
           pos: this.randomPosition(),
           radius:
-            Math.floor(Math.random() * (blackhole.radius - 30) + 15) *
+            Math.floor(Math.random() * (blackhole.radius - 15) + 15) *
             this.scale,
           game: this,
         });
@@ -136,6 +136,7 @@ export default class Game {
       this.addGameOverText();
       this.timer.started = false;
       this.timer.time = "00:00";
+      this.score = 0;
       this.timer.startTime = new Date();
       this.timer.endTimer();
     } else if (this.paused && this.started) {
@@ -150,7 +151,7 @@ export default class Game {
     this.ctx.fillStyle = "yellow";
     this.ctx.fillText(
       this.timer.time,
-      this.DIM_X / 2 - 80,
+      this.DIM_X / 2 - 87.5,
       this.DIM_Y / 2 - 320
     );
     this.ctx.fillText(
@@ -168,12 +169,12 @@ export default class Game {
     this.ctx.fillStyle = "white";
     this.ctx.fillText(
       `SCORE: ${this.objects[this.objects.length - 1].score || this.score}`,
-      this.DIM_X - 980,
+      this.DIM_X / 2 - 45,
       this.DIM_Y / 2 + 40
     );
     this.ctx.fillText(
       "Click to Restart",
-      this.DIM_X - 1020,
+      this.DIM_X / 2 - 87.5,
       this.DIM_Y / 2 + 70
     );
   }
@@ -181,7 +182,7 @@ export default class Game {
   addPausedText() {
     this.ctx.font = "48px andale mono";
     this.ctx.fillStyle = "yellow";
-    this.ctx.fillText("PAUSED", this.DIM_X / 2 - 85, this.DIM_Y / 2);
+    this.ctx.fillText("PAUSED", this.DIM_X / 2 - 82.5, this.DIM_Y / 2);
   }
 
   addLandingText() {
@@ -193,12 +194,12 @@ export default class Game {
     this.ctx.fillStyle = "white";
     this.ctx.fillText(
       "Move your mouse around to eat planets",
-      this.DIM_X - 1130,
+      this.DIM_X / 2 - 202.5,
       this.DIM_Y / 2 + 100
     );
     this.ctx.fillText(
       "Click anywhere to pause",
-      this.DIM_X - 1055,
+      this.DIM_X / 2 - 125,
       this.DIM_Y / 2 + 150
     );
   }
