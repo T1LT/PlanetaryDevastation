@@ -31,6 +31,7 @@ canvas {
 
 h1 {
   color: yellow;
+  text-shadow: 0 0 4px yellow, 0 0 11px yellow, 0 0 19px yellow, 0 0 40px yellow;
 }
 
 #timer {
