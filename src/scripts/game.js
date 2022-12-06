@@ -4,7 +4,7 @@ import Timer from "./timer";
 const background = new Image();
 background.src = "./assets/background.png";
 const bossImg = new Image();
-bossImg.src = "./assets/planet7scaled.png";
+bossImg.src = "./assets/boss1.png";
 
 export default class Game {
   constructor(canvas, mousePos) {
@@ -127,18 +127,22 @@ export default class Game {
       }
     } else if (this.timer.time === "01:30") {
       if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        bossImg.src = "./assets/boss2.png";
         this.generateBoss(blackhole, 20);
       }
     } else if (this.timer.time === "02:15") {
       if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        bossImg.src = "./assets/boss3.png";
         this.generateBoss(blackhole, 30);
       }
     } else if (this.timer.time === "03:00") {
       if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        bossImg.src = "./assets/boss4.png";
         this.generateBoss(blackhole, 40);
       }
     } else if (this.timer.time === "03:45") {
       if (this.objects.filter((el) => el.type === "boss").length < 1) {
+        bossImg.src = "./assets/boss5.png";
         this.generateBoss(blackhole, 50);
       }
     }
