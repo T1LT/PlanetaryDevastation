@@ -1,7 +1,7 @@
 import Planet from "./planet";
 const Utils = require("./utils");
 const blackholeImg = new Image();
-blackholeImg.src = "./assets/blackhole1.png";
+blackholeImg.src = "./assets/blackhole2.png";
 const planets = [];
 for (let i = 0; i <= 6; i++) {
   planets.push(new Image());
@@ -33,9 +33,9 @@ export default class MovingObject {
         // this.radius * 2
       );
     } else {
-      let posX = this.pos[0] - this.radius * 2;
-      let posY = this.pos[1] - this.radius * 2;
-      ctx.drawImage(this.image, posX, posY, this.radius * 4, this.radius * 4);
+      let posX = this.pos[0] - this.radius * 4;
+      let posY = this.pos[1] - this.radius * 4;
+      ctx.drawImage(this.image, posX, posY, this.radius * 8, this.radius * 8);
     }
     // DEBUG MODE - SEE HITBOXES
     // ctx.fillStyle = "white";
