@@ -7,8 +7,6 @@ for (let i = 0; i <= 6; i++) {
   planets.push(new Image());
   planets[i].src = `./assets/planet${i}.png`;
 }
-const bossImg = new Image();
-bossImg.src = "./assets/planet7.png";
 
 export default class MovingObject {
   constructor(options) {
@@ -53,12 +51,12 @@ export default class MovingObject {
 
   getImage() {
     if (this instanceof Planet) {
-      if (this.type === "planet") {
-        let idx = Math.floor(Math.random() * 7);
-        return planets[idx];
-      } else if (this.type === "boss") {
-        return bossImg;
-      }
+      // if (this.type === "planet") {
+      let idx = Math.floor(Math.random() * 7);
+      return planets[idx];
+      // } else if (this.type === "boss") {
+      //   return bossImg;
+      // }
     } else {
       return blackholeImg;
     }
