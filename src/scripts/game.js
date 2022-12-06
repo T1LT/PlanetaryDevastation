@@ -23,6 +23,9 @@ export default class Game {
     this.registerPause();
     this.timer = new Timer();
     this.score = 0;
+    this.music = document.createElement("audio");
+    this.music.src = "./assets/tunes.mp3";
+    this.music.volume = 0.3;
   }
 
   addObjects() {
@@ -175,9 +178,11 @@ export default class Game {
     this.addGameDetails();
     if (this.running && !this.paused && this.started) {
       this.timer.startTimer();
+      this.music.play();
       requestAnimationFrame(this.start.bind(this));
     } else if (!this.running) {
       this.addGameOverText();
+      this.music.pause();
       this.timer.started = false;
       this.timer.time = "00:00";
       this.score = 0;
@@ -241,7 +246,7 @@ export default class Game {
     this.ctx.shadowOffsetX = 0;
     this.ctx.shadowOffsetY = 0;
     this.ctx.shadowBlur = 10;
-    this.ctx.fillText("CLICK TO START", this.DIM_X / 2 - 200, this.DIM_Y / 2);
+    this.ctx.fillText("CLICK TO START", this.DIM_X / 2 - 204, this.DIM_Y / 2);
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "white";
     this.ctx.shadowColor = "white";
