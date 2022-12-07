@@ -8,19 +8,13 @@ export default class Timer {
 
   startTimer(time) {
     if (!this.started) {
-      // this.startTime = "00:00";
       this.timerInterval = setInterval(() => {
         this.count += 1;
-        // let currentTime = this.getTime(this.startTime);
         this.time = this.refactorTime(this.count);
       }, 1000);
     }
     if (!this.started) this.started = true;
   }
-
-  // getTime(time) {
-  //   return Math.floor((new Date() - time) / 1000);
-  // }
 
   refactorTime(time) {
     if (time < 60) {

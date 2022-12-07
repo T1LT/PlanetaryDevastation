@@ -2,7 +2,7 @@ import MovingObject from "./moving_object";
 const Utils = require("./utils");
 
 export default class Planet extends MovingObject {
-  constructor(options, image) {
+  constructor(options) {
     super({
       pos: options.pos,
       vel: Utils.randomVec(0.025),
@@ -10,7 +10,6 @@ export default class Planet extends MovingObject {
       game: options.game,
     });
     this.type = options.type;
-    // this.image = image;
   }
 
   collideWith(otherObj) {

@@ -34,7 +34,6 @@ export default class Game {
     while (this.objects.length < this.NUM_OBJECTS) {
       const planet = new Planet({
         pos: this.randomPosition(),
-        // Math.random() * (max - min) + min
         radius: Math.floor(Math.random() * (30 - 15) + 15),
         game: this,
         type: "planet",
@@ -189,7 +188,6 @@ export default class Game {
       this.timer.time = "00:00";
       this.timer.count = 0;
       this.score = 0;
-      // this.timer.startTime = new Date();
       this.timer.endTimer();
     } else if (this.paused && this.started) {
       this.addPausedText();
@@ -299,20 +297,15 @@ export default class Game {
       this.start();
     }
     if (this.running) {
-      this.paused = !this.paused;
       // pause timer
-      // store the time when it was stopped
-      // this.saveTime = new Date();
+      this.paused = !this.paused;
       this.savedCount = this.timer.count;
       this.timer.endTimer();
       this.timer.started = false;
     }
     if (!this.paused) {
-      this.start();
       // unpause timer
-      // let time = Math.floor((new Date()).getSeconds() - this.saveTime.getSeconds() / 1000);
-      // console.log(time);
-      // this.timer.startTime = new Date() - this.saveTime;
+      this.start();
       this.timer.startTimer(this.savedCount);
     }
     if (!this.running && !this.paused && this.started) {

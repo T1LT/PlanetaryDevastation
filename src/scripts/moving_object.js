@@ -20,17 +20,13 @@ export default class MovingObject {
   draw(ctx, scale) {
     if (this instanceof Planet) {
       let posX = this.pos[0] - this.radius * scale;
-      // let posX = this.pos[0] - this.radius;
       let posY = this.pos[1] - this.radius * scale;
-      // let posY = this.pos[1] - this.radius;
       ctx.drawImage(
         this.image,
         posX,
         posY,
         this.radius * 2 * scale,
-        // this.radius * 2,
         this.radius * 2 * scale
-        // this.radius * 2
       );
     } else {
       let posX = this.pos[0] - this.radius * 4;
@@ -51,12 +47,8 @@ export default class MovingObject {
 
   getImage() {
     if (this instanceof Planet) {
-      // if (this.type === "planet") {
       let idx = Math.floor(Math.random() * 7);
       return planets[idx];
-      // } else if (this.type === "boss") {
-      //   return bossImg;
-      // }
     } else {
       return blackholeImg;
     }
