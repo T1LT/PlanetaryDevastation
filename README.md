@@ -1,17 +1,20 @@
 # Planetary Devastation
 
-## Background
+## Overview
 
-You start off as a tiny black hole in Outer Space. The goal is to get bigger and bigger by consuming other planets. You cannot consume objects that have more mass than you do. At certain intervals, bosses spawn in and the goal is to get big enough to consume the boss before the boss spawns in.
+You start off as a tiny black hole in Outer Space. Consume other planets to grow bigger. Planets and bosses that spawn in are generated based on your radius, which means that growing too big is a disadvantage. Once you get big enough, try to maintain a balance growing too big and being too small. Bosses spawn in every 45 seconds, keep an eye out for them! Try to stay alive as long as you can while fighting bosses.
+
+## How to Play
+On the landing page, click to start the game. Once the game starts, you can move your mouse around to guide the Black Hole. You can consume planets that have a radius smaller than or equal to your radius. After you get to a certain size, consuming smaller planets reduces your size. Use this to maintain your size. Your score indicates the number of planets you consumed. Click to pause/unpause the game when it is running. Click to restart the game if you lose.
 
 ## Functionality
 
-In Planetary Devastation, users will be able to:
+In Planetary Devastation, the users will be able to:
 
 - Make the black hole follow the cursor
 - Feed other planets to the black hole
+- See different kinds of planetary bodies
 - Listen to the soundtrack of the game while playing
-- Look at different kinds of planetary bodies
 
 ## Layouts
 
@@ -31,12 +34,6 @@ In Planetary Devastation, users will be able to:
 
 #### Game Over Screen
 ![Screen Shot 2022-12-07 at 1 24 41 PM](https://user-images.githubusercontent.com/65653163/206299523-0988d1ae-1709-4b36-99e9-cb7f55d858d2.png)
-
-## Technologies Used
-
-- For the core game logic - DOM Manipulation using Vanilla JavaScript
-- For the rendering - HTML, CSS and the Canvas API
-- For collisions - applied physics and mathematics
 
 ## Implementation Details
 
@@ -118,6 +115,12 @@ setMag(vec, newMag) {
     return [vec[0] * (newMag / currentMag), vec[1] * (newMag / currentMag)];
 }
 ```
+
+## Technologies Used
+
+- For the core game logic - DOM Manipulation using Vanilla JavaScript
+- For the rendering - HTML, CSS and the Canvas API
+- For collisions - applied physics and mathematics
 
 ## Implementation Timeline
 
