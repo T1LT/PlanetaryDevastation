@@ -4,20 +4,20 @@ export default class Timer {
     this.started = false;
   }
 
-  startTimer() {
+  startTimer(time) {
     if (!this.started) {
-      this.startTime = new Date();
+      this.startTime = time || new Date();
       this.timerInterval = setInterval(() => {
-        let currentTime = this.getTime();
+        let currentTime = this.getTime(this.startTime);
         this.time = this.refactorTime(currentTime);
-        this.pastTime = this.time;
+        // console.log(this.time);
       }, 1000);
     }
     if (!this.started) this.started = true;
   }
 
-  getTime() {
-    return Math.floor((new Date() - this.startTime) / 1000);
+  getTime(time) {
+    return Math.floor((new Date() - time) / 1000);
   }
 
   refactorTime(time) {

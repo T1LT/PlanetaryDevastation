@@ -25,7 +25,7 @@ export default class Game {
     this.score = 0;
     this.music = document.createElement("audio");
     this.music.src = "./assets/tunes.mp3";
-    this.music.volume = 0.3;
+    this.music.volume = 0.1;
   }
 
   addObjects() {
@@ -246,18 +246,27 @@ export default class Game {
     this.ctx.shadowOffsetX = 0;
     this.ctx.shadowOffsetY = 0;
     this.ctx.shadowBlur = 10;
-    this.ctx.fillText("CLICK TO START", this.DIM_X / 2 - 204, this.DIM_Y / 2);
+    this.ctx.fillText(
+      "CLICK TO START",
+      this.DIM_X / 2 - 204,
+      this.DIM_Y / 2 - 50
+    );
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "white";
     this.ctx.shadowColor = "white";
     this.ctx.fillText(
       "Move your mouse around to eat planets",
       this.DIM_X / 2 - 202.5,
-      this.DIM_Y / 2 + 100
+      this.DIM_Y / 2 + 50
     );
     this.ctx.fillText(
       "Watch out for bosses every 45 seconds",
       this.DIM_X / 2 - 200,
+      this.DIM_Y / 2 + 100
+    );
+    this.ctx.fillText(
+      "Maintain a balance between growing too big and being too small",
+      this.DIM_X / 2 - 330,
       this.DIM_Y / 2 + 150
     );
     this.ctx.fillText(
@@ -274,9 +283,19 @@ export default class Game {
     }
     if (this.running) {
       this.paused = !this.paused;
+      // pause timer
+      // store the time when it was stopped
+      this.saveTime = new Date();
+      this.timer.endTimer();
+      this.timer.started = false;
     }
     if (!this.paused) {
       this.start();
+      // unpause timer
+      let time = Math.floor((new Date()).getSeconds() - this.saveTime.getSeconds() / 1000);
+      // console.log(time);
+      // this.timer.startTime = new Date() - this.saveTime;
+      this.timer.startTimer(time);
     }
     if (!this.running && !this.paused && this.started) {
       this.objects = [];
@@ -287,7 +306,7 @@ export default class Game {
   }
 
   registerPause() {
-    window.addEventListener("mousedown", this.click.bind(this));
+    this.canvas.addEventListener("mousedown", this.click.bind(this));
   }
 
   wrap(pos) {

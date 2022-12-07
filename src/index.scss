@@ -5,6 +5,28 @@
 
 canvas {
     border: 3px solid white;
+    image-rendering: optimizeQuality;
+}
+
+#muteButton {
+    background: none;
+    border: none;
+    user-select: none;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+#unmuteButton {
+    background: none;
+    border: none;
+    user-select: none;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.hidden {
+    display: none;
+    user-select: none;
 }
 
 .container {

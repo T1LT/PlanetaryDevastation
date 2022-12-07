@@ -14,7 +14,21 @@ canvas.addEventListener("mousemove", (event) => {
   mousePos[1] = event.clientY;
 });
 
-
 // running the game
 const game = new Game(canvas, mousePos);
 game.start();
+
+// music toggle mute
+const muteButton = document.getElementById("muteButton");
+const unmuteButton = document.getElementById("unmuteButton");
+unmuteButton.classList.add("hidden");
+muteButton.addEventListener("click", () => {
+  game.music.volume = 0.0;
+  unmuteButton.classList.remove("hidden");
+  muteButton.classList.add("hidden");
+});
+unmuteButton.addEventListener("click", () => {
+  game.music.volume = 0.1;
+  muteButton.classList.remove("hidden");
+  unmuteButton.classList.add("hidden");
+});
