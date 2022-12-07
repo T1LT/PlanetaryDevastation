@@ -23,10 +23,13 @@ In Planetary Devastation, users will be able to:
 
 ![Screen Shot 2022-12-07 at 12 17 12 PM](https://user-images.githubusercontent.com/65653163/206299179-f4147948-4f75-40f1-b6fc-4d116d89ebd7.png)
 
+#### Bosses
 ![Screen Shot 2022-12-07 at 12 22 45 PM](https://user-images.githubusercontent.com/65653163/206299233-f6abe6d4-cfd3-49ca-92a7-14baa0167c7d.png)
 
+#### Pause Screen
 ![Screen Shot 2022-12-07 at 1 24 03 PM](https://user-images.githubusercontent.com/65653163/206299405-65b743f6-3f53-4539-b6e2-501a43c15a7b.png)
 
+#### Game Over Screen
 ![Screen Shot 2022-12-07 at 1 24 41 PM](https://user-images.githubusercontent.com/65653163/206299523-0988d1ae-1709-4b36-99e9-cb7f55d858d2.png)
 
 ## Technologies Used
