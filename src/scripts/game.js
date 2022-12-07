@@ -199,15 +199,11 @@ export default class Game {
   addGameDetails() {
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "yellow";
-    this.ctx.fillText(
-      this.timer.time,
-      this.DIM_X / 2 - 87.5,
-      this.DIM_Y / 2 - 320
-    );
+    this.ctx.fillText(this.timer.time, this.DIM_X / 2 - 87.5, 60);
     this.ctx.fillText(
       `SCORE: ${this.objects[this.objects.length - 1].score || this.score}`,
       this.DIM_X / 2,
-      this.DIM_Y / 2 - 320
+      60
     );
   }
 
