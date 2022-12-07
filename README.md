@@ -38,6 +38,87 @@ In Planetary Devastation, users will be able to:
 - For the rendering - HTML, CSS and the Canvas API
 - For collisions - applied physics and mathematics
 
+## Implementation Details
+
+### Follow the Mouse Cursor
+To make the Black Hole follow the mouse, the mouse position is constantly tracked using an event listener on the canvas. The position is offset to match the sprite and the hitbox of the sprite.
+```javascript
+// mouse movement listener
+const mousePos = [];
+canvas.addEventListener("mousemove", (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  mousePos[0] = event.clientX;
+  mousePos[1] = event.clientY;
+});
+
+// updating the position of the blackhole based on the current mousePos
+update(mousePos) {
+    let vel = mousePos.slice();
+    if (mousePos[0] !== this.pos[0] && mousePos[1] !== this.pos[1]) {
+      vel[0] -= this.pos[0] + 25;
+      vel[1] -= this.pos[1] + 83;
+      vel = Utils.setMag(vel, 0.5);
+      if (this.pos[0] + vel[0] >= 0 && this.pos[1] + vel[1] >= 0) {
+        this.pos[0] += vel[0];
+        this.pos[1] += vel[1];
+      }
+    }
+  }
+```
+
+### Collision Detection
+In every rendered frame, the game checks for a collision between any two objects on the board. If the Black Hole gets consumed at any point of time, the game ends. Other planets can consume each other in order to grow in size. After the Black Hole gets too big, the player can consume smaller planets to shrink in size.
+```javascript
+checkCollisions() {
+    for (let i = 1; i < this.objects.length; i++) {
+      for (let j = 0; j < i; j++) {
+        if (this.objects[i].isCollidedWith(this.objects[j])) {
+          if (this.objects[i].radius >= this.objects[j].radius) {
+            // if the blackhole eats a planet, reduce the scale
+            if (
+              this.objects[i] instanceof BlackHole &&
+              this.objects[i].radius > 80
+            ) {
+              this.scale -= this.scale / (4 * this.objects[i].radius);
+              this.scaleHitboxes();
+            }
+            this.objects[i].collideWith(this.objects[j], this.scale);
+          } else {
+            if (this.objects[i] instanceof BlackHole) {
+              this.score = this.objects[i].score;
+              this.running = false;
+            }
+            this.objects[j].collideWith(this.objects[i]);
+          }
+          break;
+        }
+      }
+    }
+  }
+```
+
+### p5.js Functions Implemented in Vanilla JS
+To use vectors and perform calculations on them, I implemented a couple of p5.js functions in vanilla JavaScript. These functions allowed for generating random vectors, calculating the distance between two points in a 2D space, and scaling a vector's magnitude.
+```javascript
+// generate random vectors when given a length
+randomVec(length) {
+    const deg = 2 * Math.PI * Math.random();
+    return [Math.sin(deg) * length, Math.cos(deg) * length];
+}
+
+// calculate the distance between two points
+distance(pos1, pos2) {
+    return Math.sqrt((pos1[0] - pos2[0]) ** 2 + (pos1[1] - pos2[1]) ** 2);
+}
+
+// change a vector's magnitude to a given new magnitude
+setMag(vec, newMag) {
+    let currentMag = this.distance(vec, [0, 0]);
+    return [vec[0] * (newMag / currentMag), vec[1] * (newMag / currentMag)];
+}
+```
+
 ## Implementation Timeline
 
 - Friday (W9D5) - Research on the physics aspect of the project and begin implementation
