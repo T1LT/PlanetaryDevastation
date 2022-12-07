@@ -185,8 +185,9 @@ export default class Game {
       this.music.pause();
       this.timer.started = false;
       this.timer.time = "00:00";
+      this.timer.count = 0;
       this.score = 0;
-      this.timer.startTime = new Date();
+      // this.timer.startTime = new Date();
       this.timer.endTimer();
     } else if (this.paused && this.started) {
       this.addPausedText();
@@ -285,17 +286,18 @@ export default class Game {
       this.paused = !this.paused;
       // pause timer
       // store the time when it was stopped
-      this.saveTime = new Date();
+      // this.saveTime = new Date();
+      this.savedCount = this.timer.count;
       this.timer.endTimer();
       this.timer.started = false;
     }
     if (!this.paused) {
       this.start();
       // unpause timer
-      let time = Math.floor((new Date()).getSeconds() - this.saveTime.getSeconds() / 1000);
+      // let time = Math.floor((new Date()).getSeconds() - this.saveTime.getSeconds() / 1000);
       // console.log(time);
       // this.timer.startTime = new Date() - this.saveTime;
-      this.timer.startTimer(time);
+      this.timer.startTimer(this.savedCount);
     }
     if (!this.running && !this.paused && this.started) {
       this.objects = [];
