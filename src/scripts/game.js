@@ -5,6 +5,8 @@ const background = new Image();
 background.src = "./assets/background.png";
 const bossImg = new Image();
 bossImg.src = "./assets/boss1.png";
+const planetImg = new Image();
+planetImg.src = "./assets/planet1.png";
 
 export default class Game {
   constructor(canvas, mousePos) {
@@ -232,10 +234,6 @@ export default class Game {
   addPausedText() {
     this.ctx.font = "48px andale mono";
     this.ctx.fillStyle = "yellow";
-    this.ctx.shadowColor = "white";
-    this.ctx.shadowOffsetX = 0;
-    this.ctx.shadowOffsetY = 0;
-    this.ctx.shadowBlur = 10;
     this.ctx.fillText("PAUSED", this.DIM_X / 2 - 82.5, this.DIM_Y / 2);
   }
 
@@ -255,16 +253,34 @@ export default class Game {
     this.ctx.font = "18px andale mono";
     this.ctx.fillStyle = "white";
     this.ctx.shadowColor = "white";
+    planetImg.onload = () => {
+      this.ctx.drawImage(
+        planetImg,
+        this.DIM_X / 2 - 250,
+        this.DIM_Y / 2 + 20,
+        50,
+        50
+      );
+    };
     this.ctx.fillText(
       "Move your mouse around to eat planets",
-      this.DIM_X / 2 - 202.5,
+      this.DIM_X / 2 - 180,
       this.DIM_Y / 2 + 50
     );
     this.ctx.fillText(
       "Watch out for bosses every 45 seconds",
-      this.DIM_X / 2 - 200,
+      this.DIM_X / 2 - 220,
       this.DIM_Y / 2 + 100
     );
+    bossImg.onload = () => {
+      this.ctx.drawImage(
+        bossImg,
+        this.DIM_X / 2 + 200,
+        this.DIM_Y / 2 + 70,
+        50,
+        50
+      );
+    };
     this.ctx.fillText(
       "Maintain a balance between growing too big and being too small",
       this.DIM_X / 2 - 330,
