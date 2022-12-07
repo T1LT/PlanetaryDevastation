@@ -45,3 +45,10 @@ In Planetary Devastation, users will be able to:
 - Monday (W10D1) - Implementing core game logic with Canvas API
 - Tuesday (W10D2) - Implementing core game logic with Canvas API / CSS
 - Wednesday (W10D3) - Finish up CSS
+
+## Future Features
+
+- Add a scoreboard which keeps track of scores across sessions
+- Add multiplayer functionality using websockets
+- Add more songs to the soundtrack
+- Add sprite variety
