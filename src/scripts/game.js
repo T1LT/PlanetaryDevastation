@@ -124,7 +124,7 @@ export default class Game {
 
   addBosses() {
     const blackhole = this.objects.at(-1);
-    if (this.timer.time === "00:10") {
+    if (this.timer.time === "00:45") {
       if (this.objects.filter((el) => el.type === "boss").length < 1) {
         this.generateBoss(blackhole, 10);
       }
