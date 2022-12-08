@@ -138,6 +138,7 @@ setMag(vec, newMag) {
 - For the core game logic - DOM Manipulation using Vanilla JavaScript
 - For the rendering - HTML, CSS and the Canvas API
 - For collisions - applied physics and mathematics
+- For transpilation and bundling - Babel and Webpack
 
 ## Implementation Timeline
 
