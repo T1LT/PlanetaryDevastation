@@ -5,7 +5,7 @@ export default class Planet extends MovingObject {
   constructor(options) {
     super({
       pos: options.pos,
-      vel: Utils.randomVec(0.025),
+      vel: Utils.randomVec(0.075),
       radius: options.radius,
       game: options.game,
     });
