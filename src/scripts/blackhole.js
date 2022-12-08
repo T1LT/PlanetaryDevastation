@@ -23,7 +23,7 @@ export default class BlackHole extends MovingObject {
     if (mousePos[0] !== this.pos[0] && mousePos[1] !== this.pos[1]) {
       vel[0] -= this.pos[0] + 25;
       vel[1] -= this.pos[1] + 83;
-      vel = Utils.setMag(vel, 0.75);
+      vel = Utils.setMag(vel, 1);
       if (this.pos[0] + vel[0] >= 0 && this.pos[1] + vel[1] >= 0) {
         this.pos[0] += vel[0];
         this.pos[1] += vel[1];
