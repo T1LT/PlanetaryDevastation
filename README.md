@@ -140,13 +140,6 @@ setMag(vec, newMag) {
 - For collisions - applied physics and mathematics
 - For transpilation and bundling - Babel and Webpack
 
-## Implementation Timeline
-
-- Friday (W9D5) - Research on the physics aspect of the project and begin implementation
-- Weekend - Implementing the smaller components and incorporating sprites
-- Monday (W10D1) - Implementing core game logic with Canvas API
-- Tuesday (W10D2) - Implementing core game logic with Canvas API / CSS
-- Wednesday (W10D3) - Finish up CSS
 
 ## Future Features
 
