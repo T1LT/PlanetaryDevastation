@@ -1,3 +1,72 @@
-*{margin:0;padding:0}canvas{border:3px solid #fff;image-rendering:optimizeQuality}#muteButton{background:none;border:none;user-select:none;cursor:pointer;margin-right:12px}#unmuteButton{background:none;border:none;user-select:none;cursor:pointer;margin-right:12px}.hidden{display:none;user-select:none}.container{display:flex;height:100vh;background-color:#000;flex-direction:column;justify-content:space-evenly;align-items:center;color:#fff}.header{display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:"andale mono",monospace;user-select:none}h1{color:#ff0;text-shadow:0 0 4px #ff0,0 0 11px #ff0,0 0 19px #ff0,0 0 40px #ff0}#timer{display:none;color:#fff}.footer{font-family:"andale mono",monospace}.footer a{margin:0 10px;color:#fff;text-decoration:none;user-select:none}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+* {
+  margin: 0;
+  padding: 0;
+}
 
-/*# sourceMappingURL=main.css.map*/
+canvas {
+  border: 3px solid white;
+  image-rendering: optimizeQuality;
+}
+
+#muteButton {
+  background: none;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+#unmuteButton {
+  background: none;
+  border: none;
+  user-select: none;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.hidden {
+  display: none;
+  user-select: none;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: black;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "andale mono", monospace;
+  user-select: none;
+}
+
+h1 {
+  color: yellow;
+  text-shadow: 0 0 4px yellow, 0 0 11px yellow, 0 0 19px yellow, 0 0 40px yellow;
+}
+
+#timer {
+  display: none;
+  color: white;
+}
+
+.footer {
+  font-family: "andale mono", monospace;
+}
+.footer a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  user-select: none;
+}
